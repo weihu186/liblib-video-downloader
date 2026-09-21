@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>Liblib Video Pull</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" type="module"></script>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="masthead">
+        <div class="eyebrow"><span></span> LOCAL MEDIA UTILITY</div>
+        <h1>把公开短片<br /><em>带回本地。</em></h1>
+        <p>粘贴 Liblib 作品页。工具会读取公开媒体地址，优先保存原始 MP4；只有 HLS 时交给 FFmpeg 无损封装。</p>
+      </header>
+
+      <section class="console" aria-label="Liblib 下载器">
+        <form id="project-form" class="url-form">
+          <label for="project-url">作品链接</label>
+          <div class="input-row">
+            <input
+              id="project-url"
+              name="url"
+              type="url"
+              required
+              autocomplete="url"
+              spellcheck="false"
+              value="https://www.liblib.tv/detail/31b600ea119b48e0bf69ca0672d18856"
+              placeholder="https://www.liblib.tv/detail/..."
+            />
+            <button id="inspect-button" class="button button-primary" type="submit">解析链接</button>
+          </div>
+        </form>
+
+        <p id="status" class="status" aria-live="polite">等待输入公开作品链接。</p>
+
+        <article id="preview" class="preview" hidden>
+          <div class="cover-wrap">
+            <img id="cover" alt="作品封面" />
+            <span id="strategy" class="badge"></span>
+          </div>
+          <div class="metadata">
+            <p class="kicker">已识别公开媒体</p>
+            <h2 id="title"></h2>
+            <p id="description"></p>
+            <button id="download-button" class="button button-download" type="button">
+              <span>下载 MP4</span><span aria-hidden="true">↓</span>
+            </button>
+          </div>
+        </article>
+
+        <section id="progress" class="progress-panel" hidden aria-label="下载进度">
+          <div class="progress-copy">
+            <span id="progress-label">正在准备…</span>
+            <strong id="progress-value">0%</strong>
+          </div>
+          <div class="progress-track"><div id="progress-bar"></div></div>
+        </section>
+
+        <a id="result-link" class="result" hidden download>
+          <span><small>DOWNLOAD READY</small><strong>保存已合并的 MP4</strong></span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </section>
+
+      <footer>
+        <span>仅处理无 DRM 的公开资源</span>
+        <span>MP4 DIRECT · HLS / FFMPEG</span>
+      </footer>
+    </main>
+  </body>
+</html>
